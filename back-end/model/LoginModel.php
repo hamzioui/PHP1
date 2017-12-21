@@ -1,7 +1,7 @@
 <?php
 $string = file_get_contents("../../auth.json");
 $json_a = json_decode($string, true);
-$authArray = $json_a['auth'];
+$authArray = $json_a;
 session_start();
 if(isset($_POST)){
     if(isset($_POST['username']) ){

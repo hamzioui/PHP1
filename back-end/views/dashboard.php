@@ -16,7 +16,7 @@ $allProducts = listAllProducts();
             <div class="page-content">
                 <div class="page-header">
                     <h1>
-                        List page
+                        List Products
                     </h1>
                 </div>
                 <div class="row">

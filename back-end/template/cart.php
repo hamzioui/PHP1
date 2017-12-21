@@ -106,58 +106,81 @@ if(count($listCart)){
 </section>
 
 <div class="album text-muted">
+<div class="container">
+    <div class="row">
 
-        <div class="row">
-            <div class="col-md-9">
-                <?php  foreach($allproducts as $key => $rows): ?>
-                    <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="<?=$rows['image'];?>" data-holder-rendered="true">
-                        <div class="card-body">
-                            <h5 class="card-title"><?=$rows['name'];?></h5>
-                            <p class="card-text"><?=$rows['description'];?></p>
-                            <a href="../model/addTocart.php?productId=<?=$rows['id'];?>" class="btn btn-primary">add to cart</a>
-                        </div>
-                    </div>
-                <?php endforeach;?>
-            </div>
-            <div class="col-md-3" style="border: 2px solid grey">
-                <h2>Panier</h2>
-                <ul class="list-group">
+        <div class="col-md-7" style="border: 2px solid grey">
+            <h2>Panier</h2>
+            <ul class="list-group">
 
-                    <?php  foreach($listCart as $key => $rows): ?>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="<?=$rows['image'];?>" height="50" width="50">
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <p>
-                                                <?=$rows['name'];?>
-                                            </p>
-                                            <p>
-                                                <?=$rows['price'];?> €
-                                            </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span class="badge badge-default badge-pill"><?=$rows['nbr'];?></span>
-                                        </div>
-
+                <?php  foreach($listCart as $key => $rows): ?>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="<?=$rows['image'];?>" height="50" width="50">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <p>
+                                            <?=$rows['name'];?>
+                                        </p>
+                                        <p>
+                                            <?=$rows['price'];?> €
+                                        </p>
                                     </div>
-                                </div>
+                                    <div class="col-md-2">
+                                        <span class="badge badge-default badge-pill"><?=$rows['nbr'];?></span>
+                                    </div>
 
+                                </div>
                             </div>
 
-                        </li>
-                    <?php endforeach;?>
-                </ul>
-                <?php
-                echo $rendertotal;
-                 echo $render;
-                ?>
+                        </div>
+
+                    </li>
+                <?php endforeach;?>
+            </ul>
+            <?php
+            echo $rendertotal;
+            ?>
+        </div>
+        <div class="col-md-5">
+            <div class="bd-example" data-example-id="">
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">Nom</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text"  id="example-text-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-search-input" class="col-2 col-form-label">address</label>
+                    <div class="col-10">
+                        <input class="form-control" type="search"  id="example-search-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                    <div class="col-10">
+                        <input class="form-control" type="email" id="example-email-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-url-input" class="col-2 col-form-label">carte bancaire</label>
+                    <div class="col-10">
+                        <input class="form-control" type="url" id="example-url-input">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Validate</button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
+
 </div>
 
 <footer class="text-muted">

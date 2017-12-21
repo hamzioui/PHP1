@@ -74,7 +74,7 @@ function deleteFile($file)
 
 function Deconnect()
 {
-    session_destroy();
+    unset($_SESSION['loggin']);
     header("Location: ../views/login.php");
     die();
 }

@@ -1,6 +1,11 @@
 
 <?php
 include '../function/function.php';
+if(!isset($_SESSION['loggin'])){
+header("Location: ../views/login.php");
+    die("not access");
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
