@@ -5,6 +5,7 @@ if(isset($_GET['productId'])) {
     $result = FindProduct($productId);
     $name = $result['name'];
     $description = $result['description'];
+    $id = $result['id'];
     $price = $result['price'];
     $image = $result['image'];
     if($result === false){
@@ -35,26 +36,27 @@ if(isset($_GET['productId'])) {
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        <form class="form-horizontal" role="form" action="../model/productsModel.php" method="post">
+                        <form class="form-horizontal" role="form" action="../model/ModifyProduct.php" method="post">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Name</label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" name="name" placeholder="put the name" class="col-xs-10 col-sm-5" value="<?=$name?>" />
+                                    <input type="text" id="form-field-1" name="name" placeholder="put the name" class="col-xs-10 col-sm-5" value="<?=$name?>" required/>
+                                    <input type="hidden" id="form-field-1" name="id" placeholder="put the name" class="col-xs-10 col-sm-5" value="<?=$id?>" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Description</label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" name="description" placeholder="put the product description" class="col-xs-10 col-sm-5" value="<?=$description?>" />
+                                    <input type="text" id="form-field-1" name="description" placeholder="put the product description" class="col-xs-10 col-sm-5" value="<?=$description?>" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Prix</label>
 
                                 <div class="col-sm-9">
-                                    <input type="number" id="form-field-1" name="price" placeholder="put product price" class="col-xs-10 col-sm-5" value="<?=$price?>" />
+                                    <input type="number" id="form-field-1" name="price" placeholder="put product price" class="col-xs-10 col-sm-5" value="<?=$price?>" required/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -68,7 +70,7 @@ if(isset($_GET['productId'])) {
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Image</label>
 
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" name="image" placeholder="put the image link" class="col-xs-10 col-sm-5" value="<?=$image?>" />
+                                    <input type="text" id="form-field-1" name="image" placeholder="put the image link" class="col-xs-10 col-sm-5" value="<?=$image?>" required/>
                                 </div>
                             </div>
 

@@ -96,7 +96,7 @@ include '../function/function.php';
             <li class="">
                 <a href="create.php">
                     <i class="menu-icon fa fa-plus-square"></i>
-                    <span class="menu-text"> Create Page </span>
+                    <span class="menu-text"> Create Product </span>
                 </a>
 
                 <b class="arrow"></b>

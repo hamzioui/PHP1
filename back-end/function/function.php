@@ -79,7 +79,6 @@ function Deconnect()
     die();
 }
 
-
 function showAlert()
 {
     if(isset($_SESSION['errorStatuts'])){
@@ -97,7 +96,6 @@ function showAlert()
     }
 
 }
-
 
 function generateHeade(){
     return "
@@ -224,19 +222,18 @@ function deleteProducts($productId)
     $arr_data = json_decode($jsondata, true);
     if(count($arr_data) > 0 )
     {
-
-        echo '<pre>' . var_export($arr_data, true) . '</pre>';
-
-        var_dump("avant");
         foreach ($arr_data as $key => $value){
             if($value['id'] == $productId){
                 unset($arr_data[$key]);
                 $arr_data = array_values($arr_data);
             }
-
         }
-        echo '<pre>' . var_export($arr_data, true) . '</pre>';
-        var_dump("apres");
+        $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+        if(file_put_contents($myFile, $jsondata)) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 
@@ -248,9 +245,45 @@ function FindProduct($productId)
     $arr_data = json_decode($jsondata, true);
     if(count($arr_data) > 0 )
     {
+        $val = false;
+        foreach ($arr_data as $key => $value){
+            if($value['id'] === $productId){
+                $val = true;
+                return $value;
+
+            } else{
+                $val = false;
+            }
+        }
+        return $val;
+    }
+}
+
+function ModifyProduct($productId,$formdata)
+{
+    $myFile ="../../products.json";
+    $arr = array();
+
+    $name = $formdata['name'];
+    $description = $formdata['description'];
+    $price = $formdata['price'];
+    $image = $formdata['image'];
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    if(count($arr_data) > 0 )
+    {
         foreach ($arr_data as $key => $value){
             if($value['id'] == $productId){
-                return $value;
+                $arr_data[$key]['name'] = $name;
+                $arr_data[$key]['description'] = $description;
+                $arr_data[$key]['price'] = $price;
+                $arr_data[$key]['image'] = $image;
+                $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+                if(file_put_contents($myFile, $jsondata)) {
+                    return true;
+                }else{
+                    return false;
+                }
             } else{
                 return false;
             }
@@ -390,6 +423,119 @@ function createProducts($formData){
 
     if(file_put_contents($myFile, $jsondata)) {
         return true;
+    }else{
+        return false;
+    }
+}
+
+function addToCart($productId){
+    $arr = array();
+    //unset($_SESSION['cart']);
+    $myFile ="../../products.json";
+    $arr = array();
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    $currentKey=0;
+    $currentState = false;
+    if(count($arr_data) > 0 )
+    {
+        $val = false;
+        foreach ($arr_data as $key => $value){
+            if($value['id'] === $productId){
+                if(isset($_SESSION['cart'])){
+                    $sessionCart = $_SESSION['cart'];
+                    if(is_array($sessionCart)){
+
+                        echo '<pre>' . var_export($_SESSION['cart'], true) . '</pre>';
+                        foreach ($sessionCart as $key1 => $val2){
+                            if($val2['id'] === $productId){
+                                $currentKey = $key1;
+                                $currentState = true;
+
+                            }else{
+                                $currentState = false;
+                            }
+                        }
+                        if($currentState === true){
+                            $sessionCart[$currentKey]['nbr'] = $sessionCart[$currentKey]['nbr']+1;
+                            $_SESSION['cart'] = $sessionCart;
+                        } else{
+                            $formdata = array(
+                                'nbr' => 1,
+                                'name' => $value['name'],
+                                'description' => $value['description'],
+                                'price' => $value['price'],
+                                'image' => $value['image'],
+                                'id' => $value['id'],
+                            );
+                            $sessionCart[] = $formdata;
+                            $_SESSION['cart'] = $sessionCart;
+                        }
+
+
+                    }
+                    return true;
+
+                }else{
+                    $formdata = array(
+                        'nbr' => 1,
+                        'name' => $value['name'],
+                        'description' => $value['description'],
+                        'price' => $value['price'],
+                        'image' => $value['image'],
+                        'id' => $value['id'],
+                    );
+
+                    $sessionCart[]=$formdata;
+                    $_SESSION['cart'] = $sessionCart;
+                    return true;
+                }
+
+            } else{
+                $val = false;
+            }
+        }
+        return $val;
+    }
+
+
+    var_dump($_SESSION['cart']);
+}
+
+function listCart(){
+    $arr = array();
+    if(isset($_SESSION['cart'])){
+        $sessionCart = $_SESSION['cart'];
+        if(is_array($sessionCart)){
+            return $sessionCart;
+        }else{
+            return $arr;
+        }
+    }else{
+        return $arr;
+    }
+}
+function TotalCart(){
+    $arr = array();
+    $total =0;
+    $totalprice = 0;
+    if(isset($_SESSION['cart'])){
+        $sessionCart = $_SESSION['cart'];
+        if(is_array($sessionCart)){
+            foreach ($sessionCart as $key =>$value){
+                $total += $value['nbr'];
+                $currentprice = $value['nbr'] * $value['price'];
+                $totalprice+=$currentprice;
+            }
+            $_SESSION['total'] = $total;
+            $_SESSION['totalprice'] = $totalprice;
+
+            $arr[] = $total;
+            $arr[] = $totalprice;
+            return $arr;
+        }else{
+            return false;
+        }
     }else{
         return false;
     }
