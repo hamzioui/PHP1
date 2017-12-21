@@ -101,5 +101,13 @@ include '../function/function.php';
 
                 <b class="arrow"></b>
             </li>
+            <li class="">
+                <a href="users.php">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text"> Users </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
         </ul>
     </div>

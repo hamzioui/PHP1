@@ -192,3 +192,205 @@ function findDiv($sentence)
 {
 
 }
+
+
+function listAllUsers()
+{
+    $myFile ="../../auth.json";
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    return $arr_data;
+}
+
+function listAllProducts()
+{
+    $myFile ="../../products.json";
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    return $arr_data;
+}
+
+function generateUniqueId(){
+    $uniqueId = time() . substr(md5(uniqid(mt_rand(), true)), 15);
+    return $uniqueId;
+}
+
+
+function deleteProducts($productId)
+{
+    $myFile ="../../products.json";
+    $arr_data = array();
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    if(count($arr_data) > 0 )
+    {
+
+        echo '<pre>' . var_export($arr_data, true) . '</pre>';
+
+        var_dump("avant");
+        foreach ($arr_data as $key => $value){
+            if($value['id'] == $productId){
+                unset($arr_data[$key]);
+                $arr_data = array_values($arr_data);
+            }
+
+        }
+        echo '<pre>' . var_export($arr_data, true) . '</pre>';
+        var_dump("apres");
+    }
+}
+
+function FindProduct($productId)
+{
+    $myFile ="../../products.json";
+    $arr = array();
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    if(count($arr_data) > 0 )
+    {
+        foreach ($arr_data as $key => $value){
+            if($value['id'] == $productId){
+                return $value;
+            } else{
+                return false;
+            }
+
+        }
+    }
+}
+
+function Show404Page(){
+    return "<div class=\"main-content\">
+				<div class=\"main-content-inner\">
+					<div class=\"breadcrumbs ace-save-state\" id=\"breadcrumbs\">
+						<ul class=\"breadcrumb\">
+							<li>
+								<i class=\"ace-icon fa fa-home home-icon\"></i>
+								<a href=\"#\">Home</a>
+							</li>
+
+							<li>
+								<a href=\"#\">products Pages</a>
+							</li>
+							<li class=\"active\">Error 404</li>
+						</ul><!-- /.breadcrumb -->
+
+					</div>
+
+					<div class=\"page-content\">
+					
+
+						<div class=\"row\">
+							<div class=\"col-xs-12\">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class=\"error-container\">
+									<div class=\"well\">
+										<h1 class=\"grey lighter smaller\">
+											<span class=\"blue bigger-125\">
+												<i class=\"ace-icon fa fa-sitemap\"></i>
+												404
+											</span>
+											Product Not Found
+										</h1>
+
+										<hr>
+										<h3 class=\"lighter smaller\">We looked everywhere but we couldn't find it!</h3>
+
+										<div>
+										
+
+											<div class=\"space\"></div>
+											<h4 class=\"smaller\">Try one of the following:</h4>
+
+											<ul class=\"list-unstyled spaced inline bigger-110 margin-15\">
+												<li>
+													<i class=\"ace-icon fa fa-hand-o-right blue\"></i>
+													Re-check the url for typos
+												</li>
+
+												<li>
+													<i class=\"ace-icon fa fa-hand-o-right blue\"></i>
+													Read the faq
+												</li>
+
+												<li>
+													<i class=\"ace-icon fa fa-hand-o-right blue\"></i>
+													Tell us about it
+												</li>
+											</ul>
+										</div>
+
+										<hr>
+										<div class=\"space\"></div>
+
+										<div class=\"center\">
+											<a href=\"javascript:history.back()\" class=\"btn btn-grey\">
+												<i class=\"ace-icon fa fa-arrow-left\"></i>
+												Go Back
+											</a>
+
+											<a href=\"dashboard.php\" class=\"btn btn-primary\">
+												<i class=\"ace-icon fa fa-tachometer\"></i>
+												Dashboard
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div> <a href=\"#\" id=\"btn-scroll-up\" class=\"btn-scroll-up btn btn-sm btn-inverse\">
+    <i class=\"ace-icon fa fa-angle-double-up icon-only bigger-110\"></i>
+</a>
+</div>
+<script src=\"../assets/js/jquery-2.1.4.min.js\"></script>
+<script src=\"../assets/js/jquery-1.11.3.min.js\"></script>
+
+<script type=\"text/javascript\">
+    if('ontouchstart' in document.documentElement) document.write(\"<script src='assets/js/jquery.mobile.custom.min.js'>\"+\"<\"+\"/script>\");
+</script>
+
+<script src=\"../assets/js/bootstrap.min.js\"></script>
+<script src=\"../assets/js/jquery-ui.custom.min.js\"></script>
+<script src=\"../assets/js/jquery.ui.touch-punch.min.js\"></script>
+<script src=\"../assets/js/chosen.jquery.min.js\"></script>
+<script src=\"../assets/js/spinbox.min.js\"></script>
+<script src=\"../assets/js/bootstrap-datepicker.min.js\"></script>
+<script src=\"../assets/js/bootstrap-timepicker.min.js\"></script>
+<script src=\"../assets/js/moment.min.js\"></script>
+<script src=\"../assets/js/jquery.dataTables.min.js\"></script>
+<script src=\"../assets/js/jquery.dataTables.bootstrap.min.js\"></script>
+<script src=\"../assets/js/dataTables.buttons.min.js\"></script>
+<script src=\"../assets/js/daterangepicker.min.js\"></script>
+<script src=\"../assets/js/bootstrap-datetimepicker.min.js\"></script>
+<script src=\"../assets/js/bootstrap-colorpicker.min.js\"></script>
+<script src=\"../assets/js/jquery.knob.min.js\"></script>
+<script src=\"../assets/js/autosize.min.js\"></script>
+<script src=\"../assets/js/jquery.inputlimiter.min.js\"></script>
+<script src=\"../assets/js/jquery.maskedinput.min.js\"></script>
+<script src=\"../assets/js/bootstrap-tag.min.js\"></script>
+<script src=\"../assets/js/ace-elements.min.js\"></script>
+<script src=\"../assets/js/ace.min.js\"></script>
+</body>
+</html>";
+}
+
+
+function createProducts($formData){
+    $myFile ="../../products.json";
+    $arr_data = array();
+    $jsondata = file_get_contents($myFile);
+    $arr_data = json_decode($jsondata, true);
+    array_push($arr_data,$formData);
+    $jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+
+    if(file_put_contents($myFile, $jsondata)) {
+        return true;
+    }else{
+        return false;
+    }
+}

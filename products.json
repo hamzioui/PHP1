@@ -1,0 +1,18 @@
+[
+    {
+        "id": "151385514187a38d90a15075a43",
+        "name": "Chaussure de basketball Nike",
+        "description": "Chaussure de basketball Nike",
+        "price": "24545",
+        "image": "https://c.static-nike.com/a/images/t_default/jlb1fyvnj3v5exdznz3s/chaussure-de-basketball-hyperdunk-2017-qqTAO4Yd.jpg",
+        "created_at": "2017\/12\/21"
+    },
+    {
+        "id": "15138551588eaf5303a8d20f10d",
+        "name": "Nike Basketball ",
+        "description": "Nike Basketball ",
+        "price": "24545",
+        "image": "https://s3.amazonaws.com/nikeinc/assets/67228/nike-zoom-rev-net-collectors-red_native_1600.jpg?1489450430",
+        "created_at": "2017\/12\/21"
+    }
+]
